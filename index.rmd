@@ -5,6 +5,7 @@ output:
   flexdashboard::flex_dashboard:
     orientation: rows
     vertical_layout: fill
+    theme: readable
 ---
 
 
@@ -38,8 +39,8 @@ tokenb=bearer_token(token)
 
 parlamento=read_csv("parlamento.csv") %>% 
     drop_na(Twitter)
-parltweet=get_timeline(parlamento$Twitter, n=50, token = tokenb, check = FALSE)
-parltweet=filter(parltweet, created_at>=today()) %>% 
+parltweet=get_timeline(parlamento$Twitter[1], n=50, token = tokenb, check = FALSE)
+parltweet=filter(parltweet, created_at>=today()-1) %>% 
   filter(is_retweet==FALSE) %>% 
   filter(is_quote==FALSE)
 
@@ -73,7 +74,7 @@ df$text <- gsub("\\$", "", df$text)
 df$text <- gsub("@\\w+", "", df$text)
 df$text <- gsub("http\\w+", "", df$text)
 df$text <- gsub("[[:punct:]]"," ", df$text)
-df$text <- gsub('[0-9]+', '', df$text)
+#df$text <- gsub('[0-9]+', '', df$text)
 unique(df$Partito)
 
 
@@ -119,22 +120,22 @@ for (i in partiti){
 Row
 -----------------------------------------------------------------------
 
-### LEGA
+### Lega Salvini Premier
 
 ```{r}
-Lega
+try(Lega, silent = TRUE)
 ```
 
 
-### FDI
+### Fratelli d'Italia
 ```{r}
-FDI
+try(FDI, silent = TRUE)
 ```
 
 
 ### Partito Democratico
 ```{r}
-PD
+try(PD, silent = TRUE)
 ```
 
 
@@ -145,13 +146,13 @@ Row
 ### Movimento 5 Stelle
 
 ```{r}
-M5S
+try(M5S, silent = TRUE)
 ```
 
 ### Forza Italia
 
 ```{r}
-`Forza Italia`
+try(`Forza Italia`, silent = TRUE)
 ```
 
 
