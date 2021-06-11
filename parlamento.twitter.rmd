@@ -1,0 +1,185 @@
+---
+title: "parlamento.twitter"
+
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(rtweet)
+library(tidyverse)
+library(lubridate)
+library(devtools)
+library(htmltools)
+library(tidytext)
+library(htmlwidgets)
+library(tm)
+library(wordcloud2)
+
+
+
+api_key <- "C2skGJJmzQCzNBZ3CjVE2COXG"
+api_secret_key <- "amYWEq8BmiqWMoEUHzMO1Bz8HTzPVeVOSmHc4xqO7LeFqsdGTs"
+access_token <- "1174663297024569344-iDi5HqnUxqDfahA7hxlUIhNhZS4D25"
+access_token_secret <- "B7FHSKQwF0uXnLTnMyUYVtigVWY6VC0lB0O3stsK9NC3p"
+
+## authenticate via token
+token <- create_token(
+  app = "bigdatathingy",
+  consumer_key = api_key,
+  consumer_secret = api_secret_key,
+  access_token = access_token,
+  access_secret = access_token_secret)
+tokenb=bearer_token(token)
+
+parlamento=read_csv("parlamento.csv")
+parltweet=get_timeline(parlamento$Twitter, n=10, token = tokenb, check = FALSE)
+parltweet=filter(parltweet, created_at>=today()) %>% 
+  filter(is_retweet==FALSE) %>% 
+  filter(is_quote==FALSE)
+
+
+partiticol=c("Lega"='green',
+             "PD"='red',
+             "Italia Viva"='#ca2c92',
+             "M5S"='yellow', 
+             "Ex M5S"='#c1c400', 
+             "Forza Italia"='blue',
+             "Coraggio Italia"='#600080',
+             "CD"='gray',
+             "MAIE"='darkblue',
+             "Azione-+Europa"='#003399',
+             "Verdi"='#008f39',
+             "FDI"="#0d0099",
+             "LEU"="darkred",
+             "Noi con l’Italia"="gold2",
+             "SVP"="black",
+             "Senatore a vita"="grey",
+             "UDC"="skyblue"
+             )
+
+write_as_csv(parltweet, file_name = paste(today(),".csv"))
+
+
+df <- merge(parltweet, parlamento, by.x = "screen_name", by.y = "Twitter")
+df$text <- as.character(df$text)
+df$text=gsub("\\s?(f|ht)(tp)(s?)(://)([^\\.]*)[\\.|/](\\S*)", "", df$text)
+df$text <- gsub("\\$", "", df$text) 
+df$text <- gsub("@\\w+", "", df$text)
+df$text <- gsub("http\\w+", "", df$text)
+df$text <- gsub("[[:punct:]]"," ", df$text)
+df$text <- gsub('[0-9]+', '', df$text)
+unique(df$Partito)
+
+
+
+
+itastop=as_tibble_col(stopwords("italian"), column_name = "word")
+
+tokens <- df %>% 
+  group_by(Partito) %>% 
+  unnest_tokens(word, text) %>%
+  group_by(Partito) %>% 
+  count(word, sort = TRUE) %>% 
+  anti_join(itastop) %>% 
+  ungroup()
+
+tokens
+a= tokens %>% 
+  slice_max(order_by = n, n=15) %>% 
+  mutate(word = reorder(word, n)) %>% 
+  ggplot(aes(x = word, y = n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() +
+  labs(y = "Count",
+       x = "Unique words",
+       title = "Count of unique words found in tweets",
+       subtitle = "Stop words removed from the list")
+a
+tokens$Partito
+partiti=unique(na.omit(tokens$Partito))
+partiti
+for (i in partiti){
+  outputfile <- paste(i,"output.html", sep="-")
+  colore=partiticol[[i]]
+  assign(as.character(i),value = filter(tokens,Partito==i) %>% 
+           ungroup() %>% 
+           select(word,n) %>% 
+           wordcloud2(color = colore)  ) %>% 
+  saveWidget(outputfile,selfcontained = FALSE)
+  }
+```
+
+Row
+-----------------------------------------------------------------------
+
+### LEGA
+
+```{r}
+Lega
+```
+
+
+### FDI
+```{r}
+FDI
+```
+
+
+### Partito Democratico
+```{r}
+PD
+```
+
+
+
+Row
+-----------------------------------------------------------------------
+
+### Movimento 5 Stelle
+
+```{r}
+M5S
+```
+
+### Forza Italia
+
+```{r}
+`Forza Italia`
+```
+
+
+### Italia Viva
+```{r}
+try(`Italia Viva`, silent = TRUE)
+```
+
+
+
+Row
+-----------------------------------------------------------------------
+
+### Liberi e Uguali
+
+```{r}
+try(LEU, silent = TRUE)
+```
+
+
+### Azione-+Europa
+
+```{r}
+try(`Azione-+Europa`, silent = TRUE)
+```
+
+
+### Ex Movimento 5 Stelle
+
+```{r}
+try(`Ex M5S`, silent = TRUE)
+```
+

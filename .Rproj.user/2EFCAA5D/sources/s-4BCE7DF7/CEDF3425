@@ -1,0 +1,26 @@
+{
+    "id": "CEDF3425",
+    "path": "~/R/parl/itatwitter.R",
+    "project_path": "itatwitter.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1622579355278.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "183,5",
+        "scrollLine": "155"
+    },
+    "folds": "167|19|178|2|\n",
+    "lastKnownWriteTime": 1622720984,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1623438454726,
+    "read_only": false,
+    "read_only_alternatives": []
+}
