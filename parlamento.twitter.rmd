@@ -1,5 +1,5 @@
 ---
-title: "index"
+title: "parlamento.twitter"
 
 output: 
   flexdashboard::flex_dashboard:
@@ -35,8 +35,9 @@ token <- create_token(
   access_secret = access_token_secret)
 tokenb=bearer_token(token)
 
-parlamento=read_csv("parlamento.csv")
-parltweet=get_timeline(parlamento$Twitter, n=10, token = tokenb, check = FALSE)
+parlamento=read_csv("parlamento.csv") %>% 
+    drop_na(Twitter)
+parltweet=get_timeline(parlamento$Twitter, n=50, token = tokenb, check = FALSE)
 parltweet=filter(parltweet, created_at>=today()) %>% 
   filter(is_retweet==FALSE) %>% 
   filter(is_quote==FALSE)
