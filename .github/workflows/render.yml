@@ -5,7 +5,7 @@ name: Render website
 jobs:
   render:
     name: Render index.html
-    runs-on: ubuntu-latest
+    runs-on: osx_latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -16,7 +16,7 @@ jobs:
       - name: Install rmarkdown and stuff
         run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","wordcloud2"))'
       - name: Render README
-        run: Rscript -e 'rmarkdown::render("index.rmd")'
+        run: Rscript -e 'rmarkdown::render("index.rmd", flex_dashboard())'
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
