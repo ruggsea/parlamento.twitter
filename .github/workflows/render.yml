@@ -1,5 +1,4 @@
-on: 
-  schedule: push
+on: push
 
 name: Render website
 
