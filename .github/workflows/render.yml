@@ -11,7 +11,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and stuff
-        run: Rscript -e 'install.packages("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate", "wordcloud2", "htmlwidgets","htmltools")'
+        run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate", "wordcloud2", "htmlwidgets","htmltools"))'
       - name: Render README
         run: Rscript -e 'rmarkdown::render("index.rmd", output_format = "html_document")'
       - name: Commit results
