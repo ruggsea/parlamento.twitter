@@ -1,0 +1,20 @@
+on: push
+
+name: Render website
+
+jobs:
+  render:
+    name: Render README
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install rmarkdown and stuff
+        run: Rscript -e 'install.packages("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate", "wordcloud2", "htmlwidgets","htmltools")'
+      - name: Render README
+        run: Rscript -e 'rmarkdown::render("index.rmd", output_format = "html_document")'
+      - name: Commit results
+        run: |
+          git commit README.md -m 'Re-build README.Rmd' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
