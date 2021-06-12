@@ -41,7 +41,7 @@ parltweet=get_timeline(parlamento$Twitter, n=50, token = tokenb, check = FALSE)
 parltweet=filter(parltweet, created_at>=(Sys.time() - 86400)) %>% 
  # filter(is_retweet==FALSE) %>% 
   filter(is_quote==FALSE)
-
+flexdashboard::flex_dashboard()
 
 partiticol=c("Lega"='green',
              "PD"='red',
@@ -79,7 +79,6 @@ df$text <- gsub('-', ' ', df$text)
 df$text <- gsub('#', ' ', df$text)
 df$text=gsub(" *\\b[[:alpha:]]{1}\\b *", " ", df$text)
   
-devtools::install_github("lchiffon/wordcloud2")
 unique(df$Partito)
 
 
