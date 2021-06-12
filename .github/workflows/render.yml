@@ -1,4 +1,4 @@
-on: push
+on: 	push
 
 name: Render website
 
@@ -16,7 +16,7 @@ jobs:
       - name: Install rmarkdown and stuff
         run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","wordcloud2"))'
       - name: Render README
-        run: Rscript -e 'rmarkdown::render("index.rmd", flex_dashboard())'
+        run: Rscript -e 'rmarkdown::render("index.rmd", flexdashboard::flex_dashboard())'
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
