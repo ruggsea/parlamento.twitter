@@ -109,7 +109,7 @@ a= tokens %>%
        title = "Count of unique words found in tweets",
        subtitle = "Stop words removed from the list")
 a
-tokens$Partito
+
 partiti=unique(na.omit(tokens$Partito))
 partiti
 for (i in partiti){
@@ -141,7 +141,7 @@ try(FDI, silent = TRUE)
 
 ### Partito Democratico
 ```{r}
-try(PD, silent = TRUE)
+try(PD, silent = TRUE)x
 ```
 
 
