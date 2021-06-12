@@ -1,11 +1,11 @@
 ---
-title: "parlamento.twitter"
-
+title: "parlamento.twitter - Parole più usate oggi su Twitter dai politici italiani per partito"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
     vertical_layout: fill
     theme: readable
+    social: ["menu" ]
 ---
 
 
@@ -39,9 +39,9 @@ tokenb=bearer_token(token)
 
 parlamento=read_csv("parlamento.csv") %>% 
     drop_na(Twitter)
-parltweet=get_timeline(parlamento$Twitter[1], n=50, token = tokenb, check = FALSE)
-parltweet=filter(parltweet, created_at>=today()-1) %>% 
-  filter(is_retweet==FALSE) %>% 
+parltweet=get_timeline(parlamento$Twitter, n=50, token = tokenb, check = FALSE)
+parltweet=filter(parltweet, created_at>=today()-2) %>% 
+ # filter(is_retweet==FALSE) %>% 
   filter(is_quote==FALSE)
 
 
@@ -69,15 +69,20 @@ write_as_csv(parltweet, file_name = paste(today(),".csv"))
 
 df <- merge(parltweet, parlamento, by.x = "screen_name", by.y = "Twitter")
 df$text <- as.character(df$text)
+df$text=tolower(df$text)
 df$text=gsub("\\s?(f|ht)(tp)(s?)(://)([^\\.]*)[\\.|/](\\S*)", "", df$text)
 df$text <- gsub("\\$", "", df$text) 
 df$text <- gsub("@\\w+", "", df$text)
 df$text <- gsub("http\\w+", "", df$text)
 df$text <- gsub("[[:punct:]]"," ", df$text)
-#df$text <- gsub('[0-9]+', '', df$text)
+df$text <- gsub('\\b [0-9]*[0-9]', '', df$text)
+df$text <- gsub('^[0-9]*[0-9]', '', df$text)
+df$text <- gsub('-', ' ', df$text)
+df$text <- gsub('#', ' ', df$text)
+df$text=gsub(" *\\b[[:alpha:]]{1}\\b *", " ", df$text)
+  
+
 unique(df$Partito)
-
-
 
 
 itastop=as_tibble_col(stopwords("italian"), column_name = "word")
@@ -88,6 +93,7 @@ tokens <- df %>%
   group_by(Partito) %>% 
   count(word, sort = TRUE) %>% 
   anti_join(itastop) %>% 
+  filter(n > 1) %>% 
   ungroup()
 
 tokens
