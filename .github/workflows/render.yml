@@ -5,7 +5,7 @@ name: Render website
 jobs:
   render:
     name: Render index.html
-    runs-on: osx_latest
+    runs-on: macos_latest
     steps:
       - uses: actions/checkout@v2
         with:
