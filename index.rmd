@@ -140,7 +140,7 @@ try(FDI, silent = TRUE)
 
 ### Partito Democratico
 ```{r}
-try(PD, silent = TRUE)x
+try(PD, silent = TRUE)
 ```
 
 
