@@ -16,7 +16,7 @@ jobs:
       - name: Install rmarkdown and stuff
         run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate", "wordcloud2", "htmlwidgets","htmltools"))'
       - name: Render README
-        run: Rscript -e 'rmarkdown::render("index.rmd", output_format = "flex_dashboard")'
+        run: Rscript -e 'rmarkdown::render("index.rmd")'
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
