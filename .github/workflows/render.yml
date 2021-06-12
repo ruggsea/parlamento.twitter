@@ -5,7 +5,7 @@ name: Render website
 jobs:
   render:
     name: Render index.html
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -14,7 +14,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and stuff
-        run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate", "htmlwidgets","htmltools", "devtools)); devtools::install_github("lchiffon/wordcloud2"); library(wordcloud2")'
+        run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","wordcloud2"))'
       - name: Render README
         run: Rscript -e 'rmarkdown::render("index.rmd")'
       - name: Commit files

@@ -79,7 +79,7 @@ df$text <- gsub('-', ' ', df$text)
 df$text <- gsub('#', ' ', df$text)
 df$text=gsub(" *\\b[[:alpha:]]{1}\\b *", " ", df$text)
   
-
+devtools::install_github("lchiffon/wordcloud2")
 unique(df$Partito)
 
 
