@@ -1,10 +1,12 @@
-on: push
+on: 
+  schedule:
+    - cron: "0 * * * *"
 
 name: Render website
 
 jobs:
   render:
-    name: Render README
+    name: Render index.html
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +17,7 @@ jobs:
       - name: Install rmarkdown and stuff
         run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate", "wordcloud2", "htmlwidgets","htmltools"))'
       - name: Render README
-        run: Rscript -e 'rmarkdown::render("index.rmd", output_format = "html_document")'
+        run: Rscript -e 'rmarkdown::render("index.rmd", output_format = "flex_dashboard")'
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
