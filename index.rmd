@@ -1,5 +1,5 @@
 ---
-title: "parlamento.twitter - Parole più usate oggi su Twitter dai politici italiani per partito"
+title: "parlamento.twitter - Parole più usate oggi su Twitter dai politici italiani"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -40,7 +40,7 @@ tokenb=bearer_token(token)
 parlamento=read_csv("parlamento.csv") %>% 
     drop_na(Twitter)
 parltweet=get_timeline(parlamento$Twitter, n=50, token = tokenb, check = FALSE)
-parltweet=filter(parltweet, created_at>=today()-2) %>% 
+parltweet=filter(parltweet, created_at>=(Sys.time() - 86400)) %>% 
  # filter(is_retweet==FALSE) %>% 
   filter(is_quote==FALSE)
 
@@ -48,7 +48,7 @@ parltweet=filter(parltweet, created_at>=today()-2) %>%
 partiticol=c("Lega"='green',
              "PD"='red',
              "Italia Viva"='#ca2c92',
-             "M5S"='yellow', 
+             "M5S"='#ffea00', 
              "Ex M5S"='#c1c400', 
              "Forza Italia"='blue',
              "Coraggio Italia"='#600080',
@@ -118,7 +118,7 @@ for (i in partiti){
   assign(as.character(i),value = filter(tokens,Partito==i) %>% 
            ungroup() %>% 
            select(word,n) %>% 
-           wordcloud2(color = colore)  ) %>% 
+           wordcloud2(color = colore, size=0.5 ) )%>% 
   saveWidget(outputfile,selfcontained = FALSE)
   }
 ```
