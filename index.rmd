@@ -111,7 +111,7 @@ a= tokens %>%
 a
 
 partiti=unique(na.omit(tokens$Partito))
-partiti
+
 for (i in partiti){
   outputfile <- paste(i,"output.html", sep="-")
   colore=partiticol[[i]]
