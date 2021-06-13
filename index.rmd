@@ -19,8 +19,6 @@ library(htmlwidgets)
 library(tm)
 library(wordcloud2)
 
-
-
 api_key <- "C2skGJJmzQCzNBZ3CjVE2COXG"
 api_secret_key <- "amYWEq8BmiqWMoEUHzMO1Bz8HTzPVeVOSmHc4xqO7LeFqsdGTs"
 access_token <- "1174663297024569344-iDi5HqnUxqDfahA7hxlUIhNhZS4D25"

@@ -14,9 +14,9 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and stuff
-        run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","wordcloud2"))'
+        run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","devtools"))'
       - name: Render README
-        run: Rscript -e 'rmarkdown::render("index.rmd", flexdashboard::flex_dashboard())'
+        run: Rscript -e 'rmarkdown::render("index.rmd")'
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
