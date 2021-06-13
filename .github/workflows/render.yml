@@ -1,6 +1,6 @@
 on:
   schedule:
-    "*/30 * * * *"
+    - cron: "*/30 * * * *"
 
 name: Render website
 
