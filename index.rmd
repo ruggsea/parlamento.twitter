@@ -17,7 +17,11 @@ library(htmltools)
 library(tidytext)
 library(htmlwidgets)
 library(tm)
+library(devtools)
+
+devtools::install_github("lchiffon/wordcloud2", upgrade = "always", force = TRUE)
 library(wordcloud2)
+
 
 api_key <- "C2skGJJmzQCzNBZ3CjVE2COXG"
 api_secret_key <- "amYWEq8BmiqWMoEUHzMO1Bz8HTzPVeVOSmHc4xqO7LeFqsdGTs"
