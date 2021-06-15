@@ -67,7 +67,7 @@ partiticol=c("Lega"='green',
              "UDC"="skyblue"
              )
 
-write_as_csv(parltweet, file_name = paste(today(),".csv"))
+write_as_csv(parltweet, file_name = paste(today("CEST"),".csv"))
 
 
 df <- merge(parltweet, parlamento, by.x = "screen_name", by.y = "Twitter")
