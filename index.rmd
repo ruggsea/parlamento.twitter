@@ -1,5 +1,5 @@
 ---
-title: "parlamento.twitter - Parole più usate oggi su Twitter dai politici italiani nelle scorse 24 ore"
+title: Parole più usate dai politici italiani su Twitter nelle scorse 24 ore
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -7,6 +7,9 @@ output:
     theme: readable
 ---
 
+<style>
+
+</style>
 
 ```{r setup, include=FALSE}
 library(flexdashboard)

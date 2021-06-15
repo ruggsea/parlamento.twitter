@@ -138,7 +138,7 @@ df$text <- gsub('[0-9]+', '', df$text)
 unique(df$Partito)
 
 
-
+with_local_libpath  
 
 itastop=as_tibble_col(stopwords("italian"), column_name = "word")
 
