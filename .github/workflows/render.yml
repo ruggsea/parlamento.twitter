@@ -6,7 +6,7 @@ on:
 name: Render website
 
 env:
-  GITHUB_PAT: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 
+  GITHUB_PAT: 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 
 jobs:
   render:
     name: Render index.html
