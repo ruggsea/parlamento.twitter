@@ -16,7 +16,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and stuff
-        run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","devtools"))'
+        run: Rscript -e 'Sys.unsetenv("GITHUB_PAT") ; install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","devtools"))'
       - name: Render README
         run: Rscript -e 'rmarkdown::render("index.rmd")'
       - name: Commit files
