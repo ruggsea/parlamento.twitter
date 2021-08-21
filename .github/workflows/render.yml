@@ -9,7 +9,11 @@ jobs:
   render:
     name: Render index.html
     runs-on: macos-latest
+    env:
+      - GITHUB_PAT=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 
     steps:
+      - env:
+          - GITHUB_PAT=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 
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 
@@ -17,7 +21,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and stuff
-        run: Rscript -e 'Sys.unsetenv("GITHUB_PAT") ; install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","devtools"))'
+        run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","devtools"))'
       - name: Render README
         run: Rscript -e 'rmarkdown::render("index.rmd")'
       - name: Commit files
