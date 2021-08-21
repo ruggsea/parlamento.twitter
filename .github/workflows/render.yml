@@ -5,12 +5,12 @@ on:
 
 name: Render website
 
+env:
+  GITHUB_PAT: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 
 jobs:
   render:
     name: Render index.html
     runs-on: macos-latest
-    env:
-      GITHUB_PAT=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 
     steps:
       - uses: actions/checkout@v2
         with:
