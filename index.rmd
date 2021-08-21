@@ -23,7 +23,7 @@ library(htmlwidgets)
 library(tm)
 library(devtools)
 Sys.unsetenv("GITHUB_PAT")
-devtools::install_github("lchiffon/wordcloud2", auth_token = NULL)
+devtools::install_git("https://github.com/Lchiffon/wordcloud2", upgrade = "always", force = TRUE)
 library(wordcloud2)
 
 
