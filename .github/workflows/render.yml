@@ -12,8 +12,6 @@ jobs:
     env:
       - GITHUB_PAT=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 
     steps:
-      - env:
-          - GITHUB_PAT=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 
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 
