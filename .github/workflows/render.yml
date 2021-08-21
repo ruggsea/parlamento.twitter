@@ -19,13 +19,9 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown and stuff 
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: Rscript -e 'install.packages(c("rmarkdown", "flexdashboard", "rtweet", "tidyverse", "tm", "tidytext", "lubridate","htmlwidgets","htmltools","devtools"))'
       - name: Render README
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-        run: Rscript -e 'rmarkdown::render("index.rmd")'
+        run: Rscript -e 'Sys.unsetenv("GITHUB_PAT") ; rmarkdown::render("index.rmd")'
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"

@@ -22,7 +22,7 @@ library(tidytext)
 library(htmlwidgets)
 library(tm)
 library(devtools)
-Sys.setenv("GITHUB_PAT" = "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" )
+Sys.unsetenv("GITHUB_PAT")
 devtools::install_github("lchiffon/wordcloud2")
 library(wordcloud2)
 
