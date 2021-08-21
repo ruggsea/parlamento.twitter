@@ -23,7 +23,7 @@ library(htmlwidgets)
 library(tm)
 library(devtools)
 Sys.setenv("GITHUB_PAT" = "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" )
-devtools::install_github("lchiffon/wordcloud2", upgrade = "always", force = TRUE,  auth_token = "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" )
+devtools::install_github("lchiffon/wordcloud2")
 library(wordcloud2)
 
 
