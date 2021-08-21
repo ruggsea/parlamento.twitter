@@ -22,7 +22,7 @@ library(tidytext)
 library(htmlwidgets)
 library(tm)
 library(devtools)
-devtools::install_github("lchiffon/wordcloud2", upgrade = "always", force = TRUE)
+devtools::install_github("tidyverse/tidyverse", upgrade = "always", force = TRUE)
 library(wordcloud2)
 
 
