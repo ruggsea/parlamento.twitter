@@ -33,7 +33,10 @@ token <- create_token(
   consumer_secret = api_secret_key,
   access_token = access_token,
   access_secret = access_token_secret)
-tokenb=bearer_token(token)
+tokenb=try(bearer_token(token))
+if (class(tokenb) == "try-error") {
+  tokenb=token
+}
 
 parlamento=read_csv("parlamento.csv") %>% 
     drop_na(Twitter)
