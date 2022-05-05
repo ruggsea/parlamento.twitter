@@ -37,7 +37,7 @@ api_key <- Sys.getenv("API_KEY")
 api_secret_key <-Sys.getenv("API_SECRET_KEY")
 access_token <-Sys.getenv("ACCESS_TOKEN")
 access_token_secret <- Sys.getenv("ACCESS_TOKEN_SECRET")
-
+print(access_token_secret)
 ## authenticate via token
 token <- create_token(
   app = "ita_pol_dashboard",
@@ -46,9 +46,7 @@ token <- create_token(
   access_token = access_token,
   access_secret = access_token_secret)
 tokenb=try(bearer_token(token))
-if (class(tokenb) == "try-error") {
-  tokenb=token
-}
+
 
 parlamento=read_csv("parlamento.csv") %>% 
     drop_na(Twitter)
