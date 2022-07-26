@@ -5,15 +5,17 @@ on:
 
 name: Render website
 
-env:
-  API_KEY: ${{ secrets.API_KEY }}
-  API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
-  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-  ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   render:
     name: Render index.html
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
