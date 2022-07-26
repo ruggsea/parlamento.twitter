@@ -46,9 +46,19 @@ print(bearer_tokenm)
 app <- rtweet_app(bearer_token = bearer_tokenm)
 auth_as(app)
 
+rt <- search_tweets("#rstats", n = 1000, include_rts = FALSE)
+
+
 parlamento=read_csv("parlamento.csv") %>% 
-    drop_na(Twitter)
-parltweet=get_timeline(parlamento$Twitter, n=50, retryonratelimit = TRUE)
+    drop_na(Twitter) 
+
+parlament_users=lookup_users(parlamento$Twitter)
+
+
+
+parltweet=get_timeline(parlament_users$id_str, n=50, retryonratelimit = TRUE)
+
+
 parltweet=filter(parltweet, created_at>=(Sys.time() - 86400)) %>% 
  # filter(is_retweet==FALSE) %>% 
   filter(is_quote==FALSE)
