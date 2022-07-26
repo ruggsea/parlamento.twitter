@@ -40,7 +40,7 @@ access_token_secret <- Sys.getenv("ACCESS_TOKEN_SECRET")
 bearer_tokenm = Sys.getenv("BEARER_TOKEN")
 
 
-app <- rtweet_app(api_key = api_key, api_secret = api_secret_key, access_token = access_token, access_secret= access_token_secret)
+app <- rtweet_bot(api_key = api_key, api_secret = api_secret_key, access_token = access_token, access_secret= access_token_secret)
 auth_as(app)
 
 parlamento=read_csv("parlamento.csv") %>% 
