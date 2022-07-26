@@ -40,7 +40,8 @@ access_token_secret <- Sys.getenv("ACCESS_TOKEN_SECRET")
 bearer_tokenm = Sys.getenv("BEARER_TOKEN")
 
 
-print(access_token, bearer_tokenm)
+print(access_token)
+print(bearer_tokenm)
 
 app <- rtweet_app(bearer_token = bearer_tokenm)
 auth_as(app)
