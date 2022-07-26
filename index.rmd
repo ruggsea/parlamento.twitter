@@ -40,12 +40,12 @@ access_token_secret <- Sys.getenv("ACCESS_TOKEN_SECRET")
 bearer_tokenm = Sys.getenv("BEARER_TOKEN")
 
 
-app <- rtweet_app(bearer_token = "AAAAAAAAAAAAAAAAAAAAAHsDcQEAAAAAuNzK3xA%2BAuBfHHHAnUfjPV%2BVmS8%3D3ca3jr2qKfCFQOm8toDFxP5tXZtNf4XNBzf370trIXqrwwMqlx")
+app <- rtweet_bot(api_key = api_key, api_secret = api_secret_key, access_token = access_token, access_secret= access_token_secret)
 auth_as(app)
 
 parlamento=read_csv("parlamento.csv") %>% 
     drop_na(Twitter)
-parltweet=get_timeline(parlamento$Twitter, n=50, token = tokenb, check = FALSE)
+parltweet=get_timeline(parlamento$Twitter, n=50, check = FALSE)
 parltweet=filter(parltweet, created_at>=(Sys.time() - 86400)) %>% 
  # filter(is_retweet==FALSE) %>% 
   filter(is_quote==FALSE)
