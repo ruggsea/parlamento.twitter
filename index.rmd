@@ -61,7 +61,7 @@ parltweet=get_timeline(parlament_users$id_str, n=50, retryonratelimit = TRUE)
 
 parltweet=filter(parltweet, created_at>=(Sys.time() - 86400)) %>% 
  # filter(is_retweet==FALSE) %>% 
-  filter(is_quote==FALSE)
+  filter(is_quote_status==FALSE)
 flexdashboard::flex_dashboard()
 
 partiticol=c("Lega"='green',
@@ -83,8 +83,12 @@ partiticol=c("Lega"='green',
              "UDC"="skyblue"
              )
 
-write_as_csv(parltweet, file_name = paste(today("CEST"),".csv"))
-
+parltweetcsv <- apply(parltweet,2,as.character)
+try(write.csv(parltweetcsv, file =  paste(today("CEST"),".csv")))
+parltweet$screen_name=0
+aad=lookup_tweets(parltweet$id_str)
+aa=users_data(aad) 
+parltweet$screen_name=aa$screen_name
 
 df <- merge(parltweet, parlamento, by.x = "screen_name", by.y = "Twitter")
 df$text <- as.character(df$text)
