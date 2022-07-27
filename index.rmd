@@ -61,7 +61,7 @@ parltweet=get_timeline(parlament_users$id_str, n=50, retryonratelimit = TRUE)
 
 parltweet=filter(parltweet, created_at>=(Sys.time() - 86400)) %>% 
  # filter(is_retweet==FALSE) %>% 
-  filter(is_quote==FALSE)
+  filter(is_quote_status==FALSE)
 flexdashboard::flex_dashboard()
 
 partiticol=c("Lega"='green',
